@@ -1,0 +1,76 @@
+<idea-plugin>
+    <id>net.toekit.blockbanner</id>
+    <name>Block Banner Generator</name>
+    <vendor email="withoutthem50@gmail.com">Victor Lee</vendor>
+
+    <description><![CDATA[
+        Turns a few words into a big block-letter banner comment, in any language: English, Korean, Japanese, Chinese, symbols, mixed.
+        Instead of FIGlet fonts it rasterizes the text with a font installed on your machine, so anything your system font can draw becomes a banner.<br/>
+        <br/>
+        <b>Styles</b>
+        <ul>
+            <li><b>Shadow</b>: █ block body with a ╗║╝═ box-drawing shadow (ANSI Shadow look)</li>
+            <li><b>3D</b>: block body extruded down-right with ▒</li>
+            <li><b>Shade</b>: brightness mapped to <code>.:-=+*#%@</code></li>
+        </ul>
+        <b>Usage</b>
+        <ul>
+            <li><b>Quick</b>: select text and press <b>Alt+Shift+B</b> (macOS <b>⌥⇧B</b>). The selected lines are replaced by a banner with your last-used settings, no dialog.</li>
+            <li><b>Dialog</b>: right-click and choose <i>Block Banner…</i>, or <i>Code → Generate</i>. The dialog opens with the selected text filled in; pick font, rows and style with a live preview, then OK replaces the selection.</li>
+            <li>With nothing selected, both open the dialog and insert the banner above the caret line.</li>
+            <li>Several selected lines become stacked banners. A leading comment marker on the selected lines is removed first.</li>
+        </ul>
+        The comment prefix (<code>//</code>, <code>#</code>, <code>--</code>, <code>&lt;!-- --&gt;</code>, …) comes from the file's language and can be edited in the dialog.<br/>
+        <br/>
+        <b>Default shortcut</b>: <code>Alt+Shift+B</code> on Windows/Linux, <code>⌥⇧B</code> on macOS (Quick Block Banner).
+        Change it in <i>Settings → Keymap</i>, search "Block Banner".<br/>
+        <br/>
+        <hr/>
+        <b>한국어</b><br/>
+        몇 단어를 큼직한 블록 글자 배너 주석으로 바꿔 줍니다. 영어, 한글, 일본어, 중국어, 기호, 혼합 등 모든 문자가 됩니다.
+        FIGlet 폰트 대신 PC 에 설치된 폰트로 글자를 직접 그리기 때문에, 시스템 폰트가 표시할 수 있는 문자는 전부 배너가 됩니다.<br/>
+        <br/>
+        <b>스타일</b>
+        <ul>
+            <li><b>Shadow</b>: █ 블록 몸체 + ╗║╝═ 박스 문자 그림자 (ANSI Shadow 느낌)</li>
+            <li><b>3D</b>: 블록 몸체를 오른쪽 아래로 ▒ 로 압출</li>
+            <li><b>Shade</b>: 밝기를 <code>.:-=+*#%@</code> 문자로 표현</li>
+        </ul>
+        <b>사용법</b>
+        <ul>
+            <li><b>빠른 실행</b>: 텍스트를 드래그하고 <b>Alt+Shift+B</b> (macOS <b>⌥⇧B</b>). 마지막 설정값으로 선택 줄이 즉시 배너로 바뀝니다. 다이얼로그 없음.</li>
+            <li><b>다이얼로그</b>: 드래그 후 우클릭 → <i>Block Banner…</i>, 또는 <i>Code → Generate</i>. 선택한 글자가 채워진 채 열리고, 폰트·행수·스타일을 미리보기로 고른 뒤 OK 하면 선택 줄이 교체됩니다.</li>
+            <li>선택이 없으면 둘 다 다이얼로그가 열리고 커서 줄 위에 삽입됩니다.</li>
+            <li>여러 줄을 선택하면 줄마다 배너가 쌓입니다. 선택 줄 앞의 주석 기호는 먼저 뗍니다.</li>
+        </ul>
+        주석 기호(<code>//</code>, <code>#</code>, <code>--</code>, <code>&lt;!-- --&gt;</code> 등)는 파일 언어에서 가져오며 다이얼로그에서 고칠 수 있습니다.<br/>
+        <br/>
+        <b>기본 단축키</b>: Windows/Linux <code>Alt+Shift+B</code>, macOS <code>⌥⇧B</code> (Quick Block Banner).
+        <i>Settings → Keymap</i> 에서 "Block Banner" 를 검색해 바꿀 수 있습니다.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <b>1.0.0</b><br/>
+        Initial release. Shadow / 3D / Shade styles, system font picker, live preview, comment prefix detection,
+        Quick Block Banner (Alt+Shift+B / ⌥⇧B) that replaces the selection with the last-used settings, dialog prefilled with the selection.
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <actions>
+        <action id="net.toekit.blockbanner.GenerateBannerAction"
+                class="net.toekit.blockbanner.GenerateBannerAction"
+                text="Block Banner..."
+                description="Open the banner dialog, prefilled with the selected text">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+        <action id="net.toekit.blockbanner.QuickBannerAction"
+                class="net.toekit.blockbanner.QuickBannerAction"
+                text="Quick Block Banner"
+                description="Replace the selected text with a banner using the last-used settings">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift B"/>
+        </action>
+    </actions>
+</idea-plugin>
