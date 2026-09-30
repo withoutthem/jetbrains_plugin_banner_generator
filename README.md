@@ -91,6 +91,10 @@ Shade
 
 JDK 21. The first build downloads IntelliJ IDEA Community 2025.1.
 
+## VS Code
+
+The same generator as a VS Code extension lives in [`vendor/vsCode`](vendor/vsCode). Same styles; the shortcut there is `Ctrl+Shift+Alt+B` (`⌘⇧⌥B`).
+
 ## License
 
 MIT

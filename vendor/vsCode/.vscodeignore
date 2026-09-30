@@ -1,0 +1,14 @@
+.vscode/**
+src/**
+test/**
+out/**
+scripts/**
+build/**
+vsix/**
+node_modules/**
+!node_modules/@napi-rs/**
+tsconfig.json
+esbuild.js
+.gitignore
+**/*.map
+**/*.vsix

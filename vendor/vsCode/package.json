@@ -1,0 +1,110 @@
+{
+  "name": "block-banner-generator",
+  "displayName": "Block Banner Generator",
+  "description": "Big block-letter banner comments in any language: English, Korean, Japanese, Chinese, symbols. Rendered with the fonts on your machine.",
+  "version": "1.0.0",
+  "publisher": "withoutthem",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/withoutthem/jetbrains_plugin_banner_generator"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "banner",
+    "ascii art",
+    "comment",
+    "korean",
+    "figlet"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "blockBanner.quick",
+        "title": "Quick Block Banner",
+        "category": "Block Banner"
+      },
+      {
+        "command": "blockBanner.dialog",
+        "title": "Block Banner...",
+        "category": "Block Banner"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "blockBanner.quick",
+        "key": "ctrl+shift+alt+b",
+        "mac": "cmd+shift+alt+b",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "blockBanner.dialog",
+          "when": "editorTextFocus && !editorReadonly",
+          "group": "1_modification"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Block Banner",
+      "properties": {
+        "blockBanner.font": {
+          "type": "string",
+          "default": "",
+          "description": "Font family used to draw the banner. Leave empty for the system default. Characters the font lacks (Korean, Japanese, Chinese) are drawn with an installed font for that script."
+        },
+        "blockBanner.rows": {
+          "type": "integer",
+          "default": 10,
+          "minimum": 2,
+          "maximum": 40,
+          "description": "Banner height in lines."
+        },
+        "blockBanner.style": {
+          "type": "string",
+          "enum": [
+            "shadow",
+            "3d",
+            "shade"
+          ],
+          "default": "shadow",
+          "description": "shadow: block body with box-drawing shadow. 3d: extruded blocks. shade: brightness ramp."
+        },
+        "blockBanner.depth": {
+          "type": "integer",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Extrusion depth for the 3d style."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "test": "tsc -p . && node --test \"out/test/**/*.test.js\"",
+    "package": "vsce package",
+    "package:all": "node scripts/package-all.js"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "1.90.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.0.0"
+  }
+}
